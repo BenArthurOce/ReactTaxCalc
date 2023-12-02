@@ -1,0 +1,117 @@
+{
+    "2023": {
+        "name": "Low Income Tax Offset 2023",
+        "brackets": [
+            { "range": [0, 37500], "base": 700, "pctAdj": 0 },
+            { "range": [37501, 45000], "base": 700, "pctAdj": -0.05 },
+            { "range": [45001, 66666], "base": 325, "pctAdj": -0.015 },
+            { "range": [66667, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2022": {
+        "name": "Low Income Tax Offset 2022",
+        "brackets": [
+            { "range": [0, 37500], "base": 700, "pctAdj": 0 },
+            { "range": [37501, 45000], "base": 700, "pctAdj": -0.05 },
+            { "range": [45001, 66666], "base": 325, "pctAdj": -0.015 },
+            { "range": [66667, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2021": {
+        "name": "Low Income Tax Offset 2021",
+        "brackets": [
+            { "range": [0, 37500], "base": 700, "pctAdj": 0 },
+            { "range": [37501, 45000], "base": 700, "pctAdj": -0.05 },
+            { "range": [45001, 66666], "base": 325, "pctAdj": -0.015 },
+            { "range": [66667, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2020": {
+        "name": "Low Income Tax Offset 2020",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2019": {
+        "name": "Low Income Tax Offset 2019",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2018": {
+        "name": "Low Income Tax Offset 2018",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2017": {
+        "name": "Low Income Tax Offset 2017",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2016": {
+        "name": "Low Income Tax Offset 2016",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2015": {
+        "name": "Low Income Tax Offset 2015",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2014": {
+        "name": "Low Income Tax Offset 2014",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2013": {
+        "name": "Low Income Tax Offset 2013",
+        "brackets": [
+            { "range": [0, 37000], "base": 445, "pctAdj": 0 },
+            { "range": [37001, 66667], "base": 445, "pctAdj": -0.015 },
+            { "range": [66668, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2012": {
+        "name": "Low Income Tax Offset 2012",
+        "brackets": [
+            { "range": [0, 30000], "base": 1500, "pctAdj": 0 },
+            { "range": [30001, 67500], "base": 1500, "pctAdj": -0.04 },
+            { "range": [67501, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2011": {
+        "name": "Low Income Tax Offset 2011",
+        "brackets": [
+            { "range": [0, 30000], "base": 1500, "pctAdj": 0 },
+            { "range": [30001, 67500], "base": 1500, "pctAdj": -0.04 },
+            { "range": [67501, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    },
+    "2010": {
+        "name": "Low Income Tax Offset 2010",
+        "brackets": [
+            { "range": [0, 30000], "base": 1350, "pctAdj": 0 },
+            { "range": [30001, 63750], "base": 1350, "pctAdj": -0.04 },
+            { "range": [63751, 10000000000], "base": 0, "pctAdj": 0 }
+        ]
+    }
+}

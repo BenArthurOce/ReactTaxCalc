@@ -1,0 +1,261 @@
+{
+    "2024": {
+        "name": "Medicare Surchare Rates 2024",
+        "single": {
+            "brackets": [
+                { "range": [0, 93000], "levyRate": 0.00, "tier": 0 },
+                { "range": [93001, 108000], "levyRate": 0.01, "tier": 1 },
+                { "range": [108001, 144000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [144001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 186000], "levyRate": 0.00, "tier": 0 },
+                { "range": [186001, 216000], "levyRate": 0.01, "tier": 1 },
+                { "range": [216001, 288000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [288001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2023": {
+        "name": "Medicare Surchare Rates 2023",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2022": {
+        "name": "Medicare Surchare Rates 2022",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2021": {
+        "name": "Medicare Surchare Rates 2021",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2020": {
+        "name": "Medicare Surchare Rates 2020",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2019": {
+        "name": "Medicare Surchare Rates 2019",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2018": {
+        "name": "Medicare Surchare Rates 2018",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2017": {
+        "name": "Medicare Surchare Rates 2017",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2016": {
+        "name": "Medicare Surchare Rates 2016",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+
+    "2015": {
+        "name": "Medicare Surchare Rates 2015",
+        "single": {
+            "brackets": [
+                { "range": [0, 90000], "levyRate": 0.00, "tier": 0 },
+                { "range": [90001, 105000], "levyRate": 0.01, "tier": 1 },
+                { "range": [105001, 140000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [140001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 180000], "levyRate": 0.00, "tier": 0 },
+                { "range": [180001, 210000], "levyRate": 0.01, "tier": 1 },
+                { "range": [210001, 280000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [280001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2014": {
+        "name": "Medicare Surchare Rates 2014",
+        "single": {
+            "brackets": [
+                { "range": [0, 88000], "levyRate": 0.00, "tier": 0 },
+                { "range": [88001, 102000], "levyRate": 0.01, "tier": 1 },
+                { "range": [102001, 136000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [136001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 176000], "levyRate": 0.00, "tier": 0 },
+                { "range": [176001, 204000], "levyRate": 0.01, "tier": 1 },
+                { "range": [204001, 272000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [272001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2013": {
+        "name": "Medicare Surchare Rates 2013",
+        "single": {
+            "brackets": [
+                { "range": [0, 84000], "levyRate": 0.00, "tier": 0 },
+                { "range": [84001, 97000], "levyRate": 0.01, "tier": 1 },
+                { "range": [97001, 130000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [130001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 168000], "levyRate": 0.00, "tier": 0 },
+                { "range": [168001, 194000], "levyRate": 0.01, "tier": 1 },
+                { "range": [194001, 260000], "levyRate": 0.0125, "tier": 2 },
+                { "range": [260001, "infinity"], "levyRate": 0.015, "tier": 3 }
+            ]
+        }
+    },
+    "2012": {
+        "name": "Medicare Surchare Rates 2012",
+        "single": {
+            "brackets": [
+                { "range": [0, 80000], "levyRate": 0.00, "tier": 1 },
+                { "range": [80001, "infinity"], "levyRate": 0.01, "tier": 2 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 160000], "levyRate": 0.00, "tier": 1 },
+                { "range": [160001, "infinity"], "levyRate": 0.01, "tier": 2 }
+            ]
+        }
+    },
+    "2011": {
+        "name": "Medicare Surchare Rates 2011",
+        "single": {
+            "brackets": [
+                { "range": [0, 77000], "levyRate": 0.00, "tier": 1 },
+                { "range": [77001, "infinity"], "levyRate": 0.01, "tier": 2 }
+            ]
+        },
+        "families": {
+            "brackets": [
+                { "range": [0, 154000], "levyRate": 0.00, "tier": 1 },
+                { "range": [154001, "infinity"], "levyRate": 0.01, "tier": 2 }
+            ]
+        }
+    }
+}

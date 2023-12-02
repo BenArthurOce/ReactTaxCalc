@@ -1,0 +1,152 @@
+{
+    "2010": {
+        "name": "Individual Income Tax 2010",
+        "brackets": [
+            { "range": [0, 6000], "rate": 0.00, "baseAmount": 0 },
+            { "range": [6001, 35000], "rate": 0.15, "baseAmount": 0 },
+            { "range": [35001, 80000], "rate": 0.30, "baseAmount": 4350 },
+            { "range": [80001, 180000], "rate": 0.38, "baseAmount": 17850 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 55850 }
+        ]
+    },
+    "2011": {
+        "name": "Individual Income Tax 2011",
+        "brackets": [
+            { "range": [0, 6000], "rate": 0.00, "baseAmount": 0 },
+            { "range": [6001, 37000], "rate": 0.15, "baseAmount": 0 },
+            { "range": [37001, 80000], "rate": 0.30, "baseAmount": 4650 },
+            { "range": [80001, 180000], "rate": 0.37, "baseAmount": 17550 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54550 }
+        ]
+    },
+    "2012": {
+        "name": "Individual Income Tax 2012",
+        "brackets": [
+            { "range": [0, 6000], "rate": 0.00, "baseAmount": 0 },
+            { "range": [6001, 37000], "rate": 0.15, "baseAmount": 0 },
+            { "range": [37001, 80000], "rate": 0.30, "baseAmount": 4650 },
+            { "range": [80001, 180000], "rate": 0.37, "baseAmount": 17550 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54550 }
+        ]
+    },
+    "2013": {
+        "name": "Individual Income Tax 2013",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 80000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [80001, 180000], "rate": 0.37, "baseAmount": 17547 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54547 }
+        ]
+    },
+    "2014": {
+        "name": "Individual Income Tax 2014",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 80000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [80001, 180000], "rate": 0.37, "baseAmount": 17547 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54547 }
+        ]
+    },
+    "2015": {
+        "name": "Individual Income Tax 2015",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 80000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [80001, 180000], "rate": 0.37, "baseAmount": 17547 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54547 }
+        ]
+    },
+    "2016": {
+        "name": "Individual Income Tax 2016",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 80000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [80001, 180000], "rate": 0.37, "baseAmount": 17547 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54547 }
+        ]
+    },
+    "2017": {
+        "name": "Individual Income Tax 2017",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 87000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [87001, 180000], "rate": 0.37, "baseAmount": 19822 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54232 }
+        ]
+    },
+    "2018": {
+        "name": "Individual Income Tax 2018",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 87000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [87001, 180000], "rate": 0.37, "baseAmount": 19822 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54232 }
+        ]
+    },
+    "2019": {
+        "name": "Individual Income Tax 2019",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 90000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [90001, 180000], "rate": 0.37, "baseAmount": 20797 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54097 }
+        ]
+    },
+    "2020": {
+        "name": "Individual Income Tax 2020",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 37000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [37001, 90000], "rate": 0.325, "baseAmount": 3572 },
+            { "range": [90001, 180000], "rate": 0.37, "baseAmount": 20797 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 54097 }
+        ]
+    },
+    "2021": {
+        "name": "Individual Income Tax 2021",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 45000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [45001, 120000], "rate": 0.325, "baseAmount": 5092 },
+            { "range": [120001, 180000], "rate": 0.37, "baseAmount": 29467 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 51667 }
+        ]
+    },
+    "2022": {
+        "name": "Individual Income Tax 2022",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 45000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [45001, 120000], "rate": 0.325, "baseAmount": 5092 },
+            { "range": [120001, 180000], "rate": 0.37, "baseAmount": 29467 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 51667 }
+        ]
+    },
+    "2023": {
+        "name": "Individual Income Tax 2023",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 45000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [45001, 120000], "rate": 0.325, "baseAmount": 5092 },
+            { "range": [120001, 180000], "rate": 0.37, "baseAmount": 29467 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 51667 }
+        ]
+    },
+    "2024": {
+        "name": "Individual Income Tax 2024",
+        "brackets": [
+            { "range": [0, 18200], "rate": 0.00, "baseAmount": 0 },
+            { "range": [18201, 45000], "rate": 0.19, "baseAmount": 0 },
+            { "range": [45001, 120000], "rate": 0.325, "baseAmount": 5092 },
+            { "range": [120001, 180000], "rate": 0.37, "baseAmount": 29467 },
+            { "range": [180001, 10000000000], "rate": 0.45, "baseAmount": 51667 }
+        ]
+    }
+}

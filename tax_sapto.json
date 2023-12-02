@@ -1,0 +1,81 @@
+{
+    "2023": {
+      "name": "Seniors and Pensioners Tax Offset 2023",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2022": {
+      "name": "Seniors and Pensioners Tax Offset 2022",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2021": {
+      "name": "Seniors and Pensioners Tax Offset 2021",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2020": {
+      "name": "Seniors and Pensioners Tax Offset 2020",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2019": {
+      "name": "Seniors and Pensioners Tax Offset 2019",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2018": {
+      "name": "Seniors and Pensioners Tax Offset 2018",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2017": {
+      "name": "Seniors and Pensioners Tax Offset 2017",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2016": {
+      "name": "Seniors and Pensioners Tax Offset 2016",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2015": {
+      "name": "Seniors and Pensioners Tax Offset 2015",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2014": {
+      "name": "Seniors and Pensioners Tax Offset 2014",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2013": {
+      "name": "Seniors and Pensioners Tax Offset 2013",
+      "single": { "range": [32279, 50119], "maxOffset": 2230 },
+      "couple": { "range": [28974, 83580], "maxOffset": 1602 },
+      "illness": { "range": [31279, 95198], "maxOffset": 2040 }
+    },
+    "2012": {
+      "name": "Seniors and Pensioners Tax Offset 2012",
+      "single": { "range": [30685], "maxOffset": 2230 },
+      "couple": { "range": [26680], "maxOffset": 1602 },
+      "illness": { "range": [29600], "maxOffset": 2040 }
+    },
+    "2011": {
+      "name": "Seniors and Pensioners Tax Offset 2011",
+      "single": { "range": [30685], "maxOffset": 2230 },
+      "couple": { "range": [26680], "maxOffset": 1602 },
+      "illness": { "range": [29600], "maxOffset": 2040 }
+    }
+  }
+  

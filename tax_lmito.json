@@ -1,0 +1,49 @@
+{
+    "2024": {
+      "name": "Low Middle Income Tax Offset 2024",
+      "brackets": [
+      ]
+    },
+    "2023": {
+      "name": "Low Middle Income Tax Offset 2023",
+      "brackets": [
+      ]
+    },
+    "2022": {
+      "name": "Low Middle Income Tax Offset 2022",
+      "brackets": [
+        { "range": [0, 37000], "base": 675, "pctAdj": 0 },
+        { "range": [37001, 48000], "base": 675, "pctAdj": 7.5 },
+        { "range": [48001, 90000], "base": 1500, "pctAdj": 0 },
+        { "range": [90001, 126000], "base": 1500, "pctAdj": -3 }
+      ]
+    },
+    "2021": {
+      "name": "Low Middle Income Tax Offset 2021",
+      "brackets": [
+        { "range": [0, 37000], "base": 255, "pctAdj": 0 },
+        { "range": [37001, 48000], "base": 255, "pctAdj": 7.5 },
+        { "range": [48001, 90000], "base": 1080, "pctAdj": 0 },
+        { "range": [90001, 126000], "base": 1080, "pctAdj": -3 }
+      ]
+    },
+    "2020": {
+      "name": "Low Middle Income Tax Offset 2020",
+      "brackets": [
+        { "range": [0, 37000], "base": 0, "pctAdj": 255 },
+        { "range": [37001, 48000], "base": 255, "pctAdj": 7.5 },
+        { "range": [48001, 90000], "base": 1080, "pctAdj": 0 },
+        { "range": [90001, 126000], "base": 1080, "pctAdj": -3 }
+      ]
+    },
+    "2019": {
+      "name": "Low Middle Income Tax Offset 2019",
+      "brackets": [
+        { "range": [0, 37000], "base": 0, "pctAdj": 255 },
+        { "range": [37001, 48000], "base": 255, "pctAdj": 7.5 },
+        { "range": [48001, 90000], "base": 1080, "pctAdj": 0 },
+        { "range": [90001, 126000], "base": 1080, "pctAdj": -3 }
+      ]
+    }
+  }
+  
