@@ -115,7 +115,7 @@ function TaxForm(props) {
         <br></br>
 
         {/* Form submit button */}
-        <button onClick={handleSubmit}>Submit</button>
+        <button>Submit</button>
     </form>
   );
 };

@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
-// app.use(express.json());
 const fs = require("fs");
 const path = require('path');
-
-
+const axios = require("axios");
+app.use(express.json());
 
 function errorHandler(err, req, res, next) {
     console.error("Error:", err);
@@ -13,8 +12,6 @@ function errorHandler(err, req, res, next) {
 }
 
 app.use(errorHandler);
-
-
 
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -25,10 +22,10 @@ app.get('/express_backend', (req, res) => {
 });
 
 
-const axios = require("axios");
 
 
-app.use(express.json());
+
+
 
 
   app.get("/IncomeTax", (req, res) => {
