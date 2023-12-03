@@ -34,22 +34,6 @@ function TaxFrontend() {
 
     
 
-//     <div>
-//     <h1>COMPONENT: TaxCalculation</h1>
-//     <h2>Calculation Results</h2>
-
-//     {/* conditional rendering */}
-//     {loadingFlag && <p>Loading Results</p>}
-//     {errorFlag && <p>Error loading results: {errorFlag.message}</p>}
-//     {apiData && (
-//       <TaxCalculate apiData={apiData} onTaxCalculation={setData2}/>
-//     )}
-//   </div>
-
-    // if (loadingFlag) {
-    //     return <strong>LOADING...</strong>
-    // };
-
     return (
         <div>
             <h1>COMPONENT: TaxFrontEnd</h1>

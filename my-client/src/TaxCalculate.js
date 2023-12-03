@@ -26,21 +26,22 @@ function TaxCalculate(props) {
 
     const calculateTax = () => {
         // const { income, year, apiData } = props;
-        const Zincome = props.formData.income
+        const Zincome = props.formData.income   // temp variables because I'm looking for errors and debugging
         const Zyear =  props.formData.year
         const Zdata = props.apiData
 
 
+        // if the data exists
         if (props.apiData) {
             // const brackets = props.apiData[Zyear]?.brackets || [];
             const brackets = Zdata[Zyear]['brackets']
-            const result = getTaxPayable(Zincome, Zyear, brackets);
+            const result = getTaxPayable(Zincome, Zyear, brackets);     // search through the tax brackets, get the applicable bracket and calculate the tax
             console.log(result)
             setIncomeTax(result);
 
             props.onTaxCalculation({
                 incomeTax: result,
-                // ... other values you want to pass
+                
             });
         }
     };
@@ -72,3 +73,4 @@ function TaxCalculate(props) {
 }
 
 export default TaxCalculate;
+

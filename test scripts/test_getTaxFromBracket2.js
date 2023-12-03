@@ -31,23 +31,6 @@ const getTaxPayable = (income, year) => {
       return result;
     }
   }
-
-//   const { brackets } = taxData[year]; // destructuring assignment
-//   console.log(brackets)
-
-//   for (const bracket of brackets) {
-//     console.log(bracket)
-//     const {range} = bracket
-//     const {rate} = bracket
-//     const {baseAmount} = bracket
-
-//     if (income >= range[0] && income <= range[1]) {
-//         console.log("yes");
-//         let result = 0
-//         result = ((income - range[0]) * rate) + baseAmount
-//         return result
-//     }
-//   }
 };
 
 const income = 70000;
