@@ -55,6 +55,7 @@ function TaxFrontend() {
                 formData={formData}
                 onAPIRequest={performResultState}
                 onError={performErrorState}
+                onUpdateRequests={setResult}    //get the calculated tax from TaxRequest, store as a state
                 />
             )}
         </div>

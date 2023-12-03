@@ -18,17 +18,15 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // create a GET route
 app.get('/express_backend', (req, res) => {
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+    res.send({
+        express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT'
+    });
 });
 
 
 
 
-
-
-
-
-  app.get("/IncomeTax", (req, res) => {
+app.get("/IncomeTax", (req, res) => {
     try {
         const filePath = path.join(__dirname, "tax_standard.json");
         const data = fs.readFileSync(filePath, "utf8");
@@ -41,19 +39,6 @@ app.get('/express_backend', (req, res) => {
     }
 });
 
-app.get("/MedicareLevySurcharge", (req, res) => {
-    try {
-        // const filePath = __dirname + "/tax_mls.js";
-        const filePath = path.join(__dirname, "tax_mls.json");
-        const data = fs.readFileSync(filePath, "utf8");
-        const jsonData = JSON.parse(data);
-
-        res.status(200).json(jsonData); // Send the JSON data in the response
-    } catch (error) {
-        console.error("Error reading or parsing JSON file:", error);
-        res.status(500).send("Internal Server Error");
-    }
-});
 
 
 app.get("/HECS", (req, res) => {
@@ -70,7 +55,7 @@ app.get("/HECS", (req, res) => {
 });
 
 
-  app.get('/LowIncomeTaxOffset', (req, res) => {
+app.get('/LowIncomeTaxOffset', (req, res) => {
     try {
         const filePath = path.join(__dirname, "tax_lito.json");
         const data = fs.readFileSync(filePath, "utf8");
@@ -97,6 +82,20 @@ app.get('/LowMiddleIncomeTaxOffset', (req, res) => {
     }
 });
 
+
+app.get("/MedicareLevySurcharge", (req, res) => {
+    try {
+        // const filePath = __dirname + "/tax_mls.js";
+        const filePath = path.join(__dirname, "tax_mls.json");
+        const data = fs.readFileSync(filePath, "utf8");
+        const jsonData = JSON.parse(data);
+
+        res.status(200).json(jsonData); // Send the JSON data in the response
+    } catch (error) {
+        console.error("Error reading or parsing JSON file:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 
 
