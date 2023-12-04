@@ -83,6 +83,20 @@ app.get('/LowMiddleIncomeTaxOffset', (req, res) => {
 });
 
 
+app.get("/MedicareLevyReduction", (req, res) => {
+    try {
+        const filePath = path.join(__dirname, "tax_medicareReduce.json");
+        const data = fs.readFileSync(filePath, "utf8");
+        const jsonData = JSON.parse(data);
+
+        res.status(200).json(jsonData); // Send the JSON data in the response
+    } catch (error) {
+        console.error("Error reading or parsing JSON file:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
 app.get("/MedicareLevySurcharge", (req, res) => {
     try {
         // const filePath = __dirname + "/tax_mls.js";

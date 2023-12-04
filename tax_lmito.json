@@ -44,6 +44,51 @@
         { "range": [48001, 90000], "base": 1080, "pctAdj": 0 },
         { "range": [90001, 126000], "base": 1080, "pctAdj": -3 }
       ]
+    },
+    "2018": {
+        "name": "Low Middle Income Tax Offset 2018",
+        "brackets": [
+        ]
+    },
+    "2017": {
+        "name": "Low Middle Income Tax Offset 2017",
+        "brackets": [
+        ]
+    },
+    "2016": {
+        "name": "Low Middle Income Tax Offset 2016",
+        "brackets": [
+        ]
+    },
+    "2015": {
+        "name": "Low Middle Income Tax Offset 2015",
+        "brackets": [
+        ]
+    },
+    "2014": {
+        "name": "Low Middle Income Tax Offset 2014",
+        "brackets": [
+        ]
+    },
+    "2013": {
+        "name": "Low Middle Income Tax Offset 2013",
+        "brackets": [
+        ]
+    },
+    "2012": {
+        "name": "Low Middle Income Tax Offset 2012",
+        "brackets": [
+        ]
+    },
+    "2011": {
+        "name": "Low Middle Income Tax Offset 2011",
+        "brackets": [
+        ]
+    },
+    "2010": {
+        "name": "Low Middle Income Tax Offset 2010",
+        "brackets": [
+        ]
     }
-  }
+}
   
