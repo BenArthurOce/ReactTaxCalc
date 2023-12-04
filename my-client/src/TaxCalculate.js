@@ -13,11 +13,19 @@ function TaxCalculate(props) {
     console.log("TaxCalculate props")
     console.log(props)
 
+ 
 
     const calculateTax = () => {
 
         // if the data exists
         if (props.apiData) {
+
+            let isFamily = false // Checks if taxpayer has a spouse or children
+            isFamily = (props.formData.hasSpouse === true || props.formData.children >= 1)
+            const familyAttrib = isFamily ? "families" : "single"
+
+            console.log(isFamily)
+
 
             const Zincome = props.formData.income   // temp variables because I'm looking for errors and debugging
             const Zyear =  props.formData.year
@@ -37,8 +45,8 @@ function TaxCalculate(props) {
             const brackets2 = Zdata2[Zyear]['brackets']  // HECS Repayment
             const brackets3 = Zdata3[Zyear]['brackets']  // Low income tax offset
             const brackets4 = Zdata4[Zyear]['brackets']  // Low medium income tax offset
-            const brackets5 = Zdata5[Zyear]['single']['brackets']  // Medicare Levy Reduction
-            const brackets6 = Zdata6[Zyear]['single']['brackets']  // Medicare Levy Surcharge
+            const brackets5 = Zdata5[Zyear][familyAttrib]['brackets']  // Medicare Levy Reduction
+            const brackets6 = Zdata6[Zyear][familyAttrib]['brackets']  // Medicare Levy Surcharge
             const brackets7 = Zdata7[Zyear]['single']['brackets']  // Sapto
         
 
@@ -83,6 +91,8 @@ function TaxCalculate(props) {
     useEffect(() => {
         calculateTax();
     }, []);
+
+
 
     const getTaxPayable = (income, year, brackets) => {
         console.log(`  income = ${income}    year = ${year}    brackets = ${brackets}`);
@@ -142,6 +152,12 @@ function TaxCalculate(props) {
         return 3000;
     }
     const getMedicareSurcharge = (income, year, brackets) => {
+        // Detect upper limits
+        // Check for family flag
+
+        const isFamily = false
+
+
         return 4000;
     }
     const getSeniorsPensionersTaxOffset = (income, year, brackets) => {

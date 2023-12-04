@@ -34,6 +34,34 @@ function TaxRequest(props) {
   };
 
 
+
+
+const loadingFlagtoTrue = (newData) => {
+    setLoadingFlag(false)
+}
+
+const loadingFlagtoFalse = (newData) => {
+    setLoadingFlag(false)
+}
+
+
+const performAPIdataState = (newData) => {
+    setApiData(newData);
+};
+
+
+
+const performDataState = (data) => {
+    setRequestIncomeTax(data.response1);
+    setRequestHecsRepayment(data.response2);
+    setRequestLowIncomeOffset(data.response3);
+    setRequestLowMiddleIncomeOffset(data.response4);
+    setRequestMedicareLevyReduction(data.response5);
+    setRequestMedicareLevySurcharge(data.response6);
+    setRequestSeniorsPensionersTaxOffset(data.response7);
+};
+
+
     const arrayOfEndpoints = [
         '/IncomeTax'
         ,"/HECS"
@@ -43,21 +71,9 @@ function TaxRequest(props) {
         ,"/MedicareLevySurcharge"
         ,'/SeniorsPensionersTaxOffset'
     ]
+ 
 
-    
-
-
-//     props.onFormSubmit({
-//         year: taxationYear
-//        ,income: taxableIncome
-//        ,spouse: spousesIncome
-//        ,children: numberOfChildren
-//        ,isHECS: hasHECSDebt
-//        ,amtHECS: hecsDebtAmount
-//    });
-  
-
-    console.log("TaxRequest props")
+    console.log(`\n========\nTaxRequest, props:\n========`)
     console.log(props)
 
     const handleUpdateRequests = () => {
@@ -72,8 +88,11 @@ function TaxRequest(props) {
         })
     }
 
+
   useEffect(() => {
     logMessage('Fetching data started...');
+    console.log("======== TaxRequest, useEffect has been triggered ========")
+
     Promise.all([
         
         axios.get(arrayOfEndpoints[0], { params: { formData: props.formData } }),       //Income Tax
@@ -87,16 +106,10 @@ function TaxRequest(props) {
     .then(function([response1, response2, response3, response4, response5, response6, response7]) {
 
         // Process the responses
-        setRequestIncomeTax(response1.data);
-        setRequestHecsRepayment(response2.data);
-        setRequestLowIncomeOffset(response3.data);
-        setRequestLowMiddleIncomeOffset(response4.data);
-        setRequestMedicareLevyReduction(response5.data);
-        setRequestMedicareLevySurcharge(response6.data);
-        setRequestSeniorsPensionersTaxOffset(response7.data);
+
         logMessage('All requests successful.');
 
-        setApiData({
+        performDataState({
             response1: response1.data,
             response2: response2.data,
             response3: response3.data,
@@ -106,62 +119,32 @@ function TaxRequest(props) {
             response7: response7.data
           });
 
-          setLoadingFlag(false);
-          setErrorFlags({
-            incomeTax: false,
-            hecsRepayment: false,
-            lowIncomeOffset: false,
-            lowMiddleIncomeOffset: false,
-            medicareLevyReduction: false,
-            medicareLevySurcharge: false,
-            seniorsPensionersTaxOffset: false
+        performAPIdataState({
+            response1: response1.data,
+            response2: response2.data,
+            response3: response3.data,
+            response4: response4.data,
+            response5: response5.data,
+            response6: response6.data,
+            response7: response7.data
           });
+
     })
     .catch((error) => {
         console.error("Error in requests", error);
         logMessage(`Error in requests: ${error.message}`);
 
-        // Update error flags
-        setErrorFlags({
-          incomeTax: true,
-          hecsRepayment: true,
-          lowIncomeOffset: true,
-          lowMiddleIncomeOffset: true,
-          medicareLevyReduction: true,
-          medicareLevySurcharge: true,
-          seniorsPensionersTaxOffset: true
-        });
 
-        setLoadingFlag(false);
-        setApiData(null);
+
+        loadingFlagtoFalse(false);
+        performDataState(null);
+        performAPIdataState(null);
       });
 
+  }, ['']);
 
-  }, []);
-
-//   return (
+  
     
-    
-//     <div>
-//       <h1>COMPONENT: TaxCalculation</h1>
-//       <h2>Calculation Results</h2>
-
-//       {/* conditional rendering */}
-//       {loadingFlag && <p>Loading Results</p>}
-//       {errorFlag && <p>Error loading results: {errorFlag.message}</p>}
-//       {apiData && (
-//         <TaxCalculate
-//             apiData={apiData}
-//             onTaxCalculation={handleUpdateRequests}
-//             formData={props.formData}
-//             onUpdateRequests={props.onUpdateRequests} 
-//         />
-//       )}
-//     </div>
-//   );
-
-
-
   return (
     
     
@@ -196,22 +179,6 @@ function TaxRequest(props) {
       )}
     </div>
   );
-
-// return (
-//     <div>
-//       {/* ... (unchanged) */}
-//       {/* conditional rendering with specific error messages */}
-//       {errorFlags.incomeTax && <p>Error loading Income Tax results</p>}
-//       {errorFlags.hecsRepayment && <p>Error loading HECS Repayment results</p>}
-//       {errorFlags.lowIncomeOffset && <p>Error loading Low Income Tax Offset results</p>}
-//       {errorFlags.lowMiddleIncomeOffset && <p>Error loading Low Middle Income Tax Offset results</p>}
-//       {errorFlags.medicareLevyReduction && <p>Error loading Medicare Levy Reduction results</p>}
-//       {errorFlags.medicareLevySurcharge && <p>Error loading Medicare Levy Surcharge results</p>}
-//       {errorFlags.seniorsPensionersTaxOffset && <p>Error loading Seniors and Pensioners Tax Offset results</p>}
-//       {/* ... (unchanged) */}
-//     </div>
-//   );
-
 
 }
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function TaxForm(props) {
     const [taxationYear, setTaxationYear] = useState('');
     const [taxableIncome, setTaxableIncome] = useState('');
+    const [hasSpouse, setHasSpouse] = useState('');
     const [spousesIncome, setSpousesIncome] = useState('');
     const [numberOfChildren, setNumberOfChildren] = useState(1);
     const [hasHECSDebt, setHasHECSDebt] = useState(false);
@@ -22,7 +23,8 @@ function TaxForm(props) {
         props.onFormSubmit({
              year: taxationYear
             ,income: taxableIncome
-            ,spouse: spousesIncome
+            ,hasSpouse: hasSpouse
+            ,spousesIncome: spousesIncome
             ,children: numberOfChildren
             ,isHECS: hasHECSDebt
             ,amtHECS: hecsDebtAmount
@@ -67,15 +69,27 @@ function TaxForm(props) {
         </label>
         <br></br>
 
-        {/* Input Spouse Income */}
+        {/* Boolean for Spouse */}
         <label>
-            Spouse's Income:
+            Do you have a spouse?
             <input 
-                type="text" 
-                value={spousesIncome} 
-                onChange={(e) => setSpousesIncome(e.target.value)} 
+                type="checkbox" 
+                checked={hasSpouse} 
+                onChange={() => setHasSpouse(!hasSpouse)} 
             />
         </label>
+
+        {/* Input Spouse Income */}
+        {hasSpouse && (
+            <label>
+                Spouse Income:
+                    <input 
+                    type="text" 
+                    value={spousesIncome} 
+                    onChange={(e) => setSpousesIncome(e.target.value)} 
+                />
+            </label>
+        )}
         <br></br>
 
         {/* Input Number of Children */}
