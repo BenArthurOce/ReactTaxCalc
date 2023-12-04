@@ -10,6 +10,10 @@ function TaxFrontend() {
     const [errorFlag, setErrorFlag] = useState(null);
 
 
+    const performUpdateResult = (newResult) => {
+        setResult(newResult);
+    }
+
 
     const performFormState = (newFormData) => {
         setFormData(newFormData);
@@ -55,7 +59,7 @@ function TaxFrontend() {
                 formData={formData}
                 onAPIRequest={performResultState}
                 onError={performErrorState}
-                onUpdateRequests={setResult}    //get the calculated tax from TaxRequest, store as a state
+                onUpdateRequests={performUpdateResult}    //get the calculated tax from TaxRequest, store as a state
                 />
             )}
         </div>

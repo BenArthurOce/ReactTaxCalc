@@ -10,11 +10,19 @@ function TaxCalculate(props) {
     const [seniorsPensionersTaxOffset, setSeniorsPensionersTaxOffset] = useState('');
 
 
-    console.log("TaxCalculate props")
+    const updateincomeTax = (value) => {setIncomeTax(value)}
+    const updatehecsRepayment = (value) => {setHecsRepayment(value)}
+    const updatelowIncomeOffset = (value) => {setLowIncomeOffset(value)}
+    const updatelowMiddleIncomeOffset = (value) => {setLowMiddleIncomeOffset(value)}
+    const updatemedicareLevy = (value) => {setMedicareLevy(value)}
+    const updatemedicareLevySurcharge = (value) => {setMedicareLevySurcharge(value)}
+    const updateseniorsPensionersTaxOffset = (value) => {setSeniorsPensionersTaxOffset(value)}
+
+
+    console.log(`\n%%%%%%%%%%\nTaxCalculate, props:\n%%%%%%%%%%`)
     console.log(props)
 
  
-
     const calculateTax = () => {
 
         // if the data exists
@@ -59,38 +67,22 @@ function TaxCalculate(props) {
             const result6 = getMedicareSurcharge(Zincome, Zyear, brackets6);  // Medicare Levy Surcharge
             const result7 = getSeniorsPensionersTaxOffset(Zincome, Zyear, brackets7);  // Seniors Pensioners Tax Offset
 
+           
+            updateincomeTax(result1);
+            updatehecsRepayment(result2);
+            updatelowIncomeOffset(result3);
+            updatelowMiddleIncomeOffset(result4);
+            updatemedicareLevy(result5);
+            updatemedicareLevySurcharge(result6);
+            updateseniorsPensionersTaxOffset(result7);
 
-            
-
-            setIncomeTax(result1);
-            setHecsRepayment(result2);
-            setLowIncomeOffset(result3);
-            setLowMiddleIncomeOffset(result4);
-            setMedicareLevy(result5);
-            setMedicareLevySurcharge(result6);
-            setSeniorsPensionersTaxOffset(result7);
-
-
-            props.onTaxCalculation({
-                incomeTax: incomeTax
-                ,hecsRepayment: hecsRepayment
-                ,lowIncomeOffset: lowIncomeOffset
-                ,lowMiddleIncomeOffset: lowMiddleIncomeOffset
-                ,medicareLevy: medicareLevy
-                ,medicareLevySurcharge: medicareLevySurcharge
-                ,seniorsPensionersTaxOffset: seniorsPensionersTaxOffset
-            });
         };
     };
 
 
-    // useEffect(() => {
-    //     calculateTax();
-    // }, [props.formData]);
-
     useEffect(() => {
         calculateTax();
-    }, []);
+    }, ['']);
 
 
 
