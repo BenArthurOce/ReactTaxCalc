@@ -16,21 +16,24 @@ function TaxFrontend() {
 
 
     const performFormState = (newFormData) => {
+        console.log("TaxForm - Form data updated:", newFormData);
         setFormData(newFormData);
-        setResult(null); // Reset result when new form data is submitted
-        setLoadingFlag(true); // Set loading flag when form is submitted
-        setErrorFlag(null); // Reset error flag
+        setResult(null);
+        setLoadingFlag(true);
+        setErrorFlag(null);
     };
 
 
     const performResultState = (resultData) => {
+        console.log("TaxFrontend - Result data received:", resultData);
         setResult(resultData);
-        setLoadingFlag(false); // Set loading flag to false when result is received
+        setLoadingFlag(false);
     };
-
+    
     const performErrorState = (error) => {
-        setErrorFlag(error); // Set the error message
-        setLoadingFlag(false); // Set loading flag to false when an error occurs
+        console.log("TaxFrontend - Error occurred:", error);
+        setErrorFlag(error);
+        setLoadingFlag(false);
     };
     
 
@@ -59,7 +62,7 @@ function TaxFrontend() {
                 formData={formData}
                 onAPIRequest={performResultState}
                 onError={performErrorState}
-                onUpdateRequests={performUpdateResult}    //get the calculated tax from TaxRequest, store as a state
+                onUpdateRequests={(newResult) => setResult(newResult)}    //get the calculated tax from TaxRequest, store as a state
                 />
             )}
         </div>

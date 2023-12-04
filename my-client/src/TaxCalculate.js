@@ -82,7 +82,7 @@ function TaxCalculate(props) {
 
     useEffect(() => {
         calculateTax();
-    }, ['']);
+    }, []);
 
 
 
@@ -157,14 +157,16 @@ function TaxCalculate(props) {
     }
 
     return (
-        <div>
-            <p>Income Tax: {incomeTax}</p>
-            <p>HECS Repayment: {hecsRepayment}</p>
-            <p>Low Income Tax Offset: {lowIncomeOffset}</p>
-            <p>Low Middle Income Tax Offset: {lowMiddleIncomeOffset} CURRENTLY WIP</p>
-            <p>getMedicareReduction: {medicareLevy} CURRENTLY WIP</p>
-            <p>getMedicareSurcharge: {medicareLevySurcharge} CURRENTLY WIP</p>
-            <p>getSeniorsPensionersTaxOffset: {seniorsPensionersTaxOffset} CURRENTLY WIP</p>
+        <div className="results-container">
+            <ul>
+            <li><strong>Income Tax:</strong> {incomeTax}</li>
+            <li><strong>HECS Repayment:</strong> {hecsRepayment}</li>
+            <li><strong>Low Income Tax Offset:</strong> {lowIncomeOffset}</li>
+            <li><strong>Low Middle Income Tax Offset:</strong> {lowMiddleIncomeOffset} CURRENTLY WIP</li>
+            <li><strong>getMedicareReduction:</strong> {medicareLevy} CURRENTLY WIP</li>
+            <li><strong>getMedicareSurcharge:</strong> {medicareLevySurcharge} CURRENTLY WIP</li>
+            <li><strong>getSeniorsPensionersTaxOffset:</strong> {seniorsPensionersTaxOffset} CURRENTLY WIP</li>
+            </ul>   
         </div>
     );
 }
