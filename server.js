@@ -28,7 +28,7 @@ app.get('/express_backend', (req, res) => {
 
 app.get("/IncomeTax", (req, res) => {
     try {
-        const filePath = path.join(__dirname, "tax_standard.json");
+        const filePath = path.join(__dirname, "/data.tax_standard.json");
         const data = fs.readFileSync(filePath, "utf8");
         const jsonData = JSON.parse(data);
 
@@ -43,7 +43,7 @@ app.get("/IncomeTax", (req, res) => {
 
 app.get("/HECS", (req, res) => {
     try {
-        const filePath = path.join(__dirname, "tax_hecs.json");
+        const filePath = path.join(__dirname, "/data.tax_hecs.json");
         const data = fs.readFileSync(filePath, "utf8");
         const jsonData = JSON.parse(data);
 
@@ -57,7 +57,7 @@ app.get("/HECS", (req, res) => {
 
 app.get('/LowIncomeTaxOffset', (req, res) => {
     try {
-        const filePath = path.join(__dirname, "tax_lito.json");
+        const filePath = path.join(__dirname, "/data.tax_lito.json");
         const data = fs.readFileSync(filePath, "utf8");
         const jsonData = JSON.parse(data);
 
@@ -71,7 +71,7 @@ app.get('/LowIncomeTaxOffset', (req, res) => {
 
 app.get('/LowMiddleIncomeTaxOffset', (req, res) => {
     try {
-        const filePath = path.join(__dirname, "tax_lmito.json");
+        const filePath = path.join(__dirname, "/data.tax_mito.json");
         const data = fs.readFileSync(filePath, "utf8");
         const jsonData = JSON.parse(data);
 
@@ -85,7 +85,7 @@ app.get('/LowMiddleIncomeTaxOffset', (req, res) => {
 
 app.get("/MedicareLevyReduction", (req, res) => {
     try {
-        const filePath = path.join(__dirname, "tax_medicareReduce.json");
+        const filePath = path.join(__dirname, "/data.tax_medicareReduce.json");
         const data = fs.readFileSync(filePath, "utf8");
         const jsonData = JSON.parse(data);
 
@@ -100,7 +100,7 @@ app.get("/MedicareLevyReduction", (req, res) => {
 app.get("/MedicareLevySurcharge", (req, res) => {
     try {
         // const filePath = __dirname + "/tax_mls.js";
-        const filePath = path.join(__dirname, "tax_mls.json");
+        const filePath = path.join(__dirname, "/data.tax_mls.json");
         const data = fs.readFileSync(filePath, "utf8");
         const jsonData = JSON.parse(data);
 
@@ -115,7 +115,7 @@ app.get("/MedicareLevySurcharge", (req, res) => {
 
 app.get('/SeniorsPensionersTaxOffset', (req, res) => {
     try {
-        const filePath = path.join(__dirname, "tax_sapto.json");
+        const filePath = path.join(__dirname, "/data.tax_apto.json");
         const data = fs.readFileSync(filePath, "utf8");
         const jsonData = JSON.parse(data);
 

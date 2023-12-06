@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaxCalculate from './TaxCalculate';
 
+
 function TaxRequest(props) {
 
     const [apiData, setApiData] = useState(null);
