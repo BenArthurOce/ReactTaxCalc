@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import TaxCalculate from './TaxCalculate';
 
 
@@ -10,15 +9,6 @@ function TaxRequest(props) {
     const [errorFlag, setErrorFlag] = useState(false);
 
 
-    const [requestIncomeTax, setRequestIncomeTax] = useState('');
-    const [requestHecsRepayment, setRequestHecsRepayment] = useState('');
-    const [requestLowIncomeOffset, setRequestLowIncomeOffset] = useState('');
-    const [requestLowMiddleIncomeOffset, setRequestLowMiddleIncomeOffset] = useState('');
-    const [requestMedicareLevyReduction, setRequestMedicareLevyReduction] = useState('');
-    const [requestMedicareLevySurcharge, setRequestMedicareLevySurcharge] = useState('');
-    const [requestSeniorsPensionersTaxOffset, setRequestSeniorsPensionersTaxOffset] = useState('');
-
-
     const [errorFlags, setErrorFlags] = useState({
         incomeTax: false,
         hecsRepayment: false,
@@ -26,7 +16,6 @@ function TaxRequest(props) {
         lowMiddleIncomeOffset: false,
         medicareLevyReduction: false,
         medicareLevySurcharge: false,
-        seniorsPensionersTaxOffset: false,
     });
 
     const loadingFlagtoTrue = () => {
@@ -42,82 +31,46 @@ function TaxRequest(props) {
     };
 
 
-    const performDataState = (data) => {
-        setRequestIncomeTax(data.response1);
-        setRequestHecsRepayment(data.response2);
-        setRequestLowIncomeOffset(data.response3);
-        setRequestLowMiddleIncomeOffset(data.response4);
-        setRequestMedicareLevyReduction(data.response5);
-        setRequestMedicareLevySurcharge(data.response6);
-        setRequestSeniorsPensionersTaxOffset(data.response7);
-    };
-
-
-
-    console.log(`\n========\nTaxRequest, props:\n========`)
-    console.log(props)
-
-
     useEffect(() => {
 
         console.log("======== TaxRequest, useEffect has been triggered ========")
 
-        const arrayOfEndpoints = [
-            '/IncomeTax'
-            ,"/HECS"
-            ,'/LowIncomeTaxOffset'
-            ,'/LowMiddleIncomeTaxOffset'
-            ,"/MedicareLevyReduction"
-            ,"/MedicareLevySurcharge"
-            ,'/SeniorsPensionersTaxOffset'
-        ];
+        const url = "https://benarthuroce.github.io/TaxRatesJSON/atoJSON.json";
 
-        Promise.all([
-            axios.get(arrayOfEndpoints[0], { params: { formData: props.formData } }),       //Income Tax
-            axios.get(arrayOfEndpoints[1], { params: { formData: props.formData } }),       //HECS Repayment
-            axios.get(arrayOfEndpoints[2], { params: { formData: props.formData } }),       //Low Income Tax Offset
-            axios.get(arrayOfEndpoints[3], { params: { formData: props.formData } }),       //Low Middle Income Tax Offset
-            axios.get(arrayOfEndpoints[4], { params: { formData: props.formData } }),       //Medicare Levy Reduction
-            axios.get(arrayOfEndpoints[5], { params: { formData: props.formData } }),       //Medicare Levy Surcharge
-            axios.get(arrayOfEndpoints[6], { params: { formData: props.formData } }),       //Seniors and Pensiors Tax Offset
-        ])
-        .then(function([response1, response2, response3, response4, response5, response6, response7]) {
 
-            // Process the responses
-
-            performDataState({
-                response1: response1.data,
-                response2: response2.data,
-                response3: response3.data,
-                response4: response4.data,
-                response5: response5.data,
-                response6: response6.data,
-                response7: response7.data
-            });
-
-            performAPIdataState({
-                response1: response1.data,
-                response2: response2.data,
-                response3: response3.data,
-                response4: response4.data,
-                response5: response5.data,
-                response6: response6.data,
-                response7: response7.data
-            });
+        fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`Fetch Request failed | Status: ${response.status}`);
+            }
+                return response.json();
+            })
+        //Obtain the tax data for each type of tax
+        .then((jsonData) => {
+            try {
+                const APIHeaders = [            // List of tax categories (Main "branches" for the JSON file)
+                      "Individual Income Tax"
+                    , "HECS Repayment Rates"
+                    , "Low Income Tax Offset"
+                    , "Low Middle Income Tax Offset"
+                    , "Medicare Levy Reduction"
+                    , "Medicare Levy Surchage"
+                ];
+                return Promise.all(APIHeaders.map((header) => jsonData[header]));   // Store each Promise / Header in an array
+            }
+            catch (error) {
+                throw new Error(`Something went wrong when mapping the Promises | Error: ${error}`);
+            };
+        })
+        // Put all the bracket data into the component state
+        .then(([incomeTaxData, hecsData, litoData, lmitoData, medicareReductionData, medicareSurchargeData]) => {
+            performAPIdataState([incomeTaxData, hecsData, litoData, lmitoData, medicareReductionData, medicareSurchargeData])
         })
         .catch((error) => {
-            console.error("Error in requests", error);
-
-            loadingFlagtoFalse(false);
-            performDataState(null);
-            performAPIdataState(null);
+            console.error("Error caught:", error);
         });
-
-        return () => {}
-
+        
     }, []);
-
-
 
     return (
 

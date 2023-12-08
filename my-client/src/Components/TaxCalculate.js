@@ -7,7 +7,7 @@ function TaxCalculate(props) {
     const [lowMiddleIncomeOffset, setLowMiddleIncomeOffset] = useState('');
     const [medicareLevy, setMedicareLevy] = useState('');
     const [medicareLevySurcharge, setMedicareLevySurcharge] = useState('');
-    const [seniorsPensionersTaxOffset, setSeniorsPensionersTaxOffset] = useState('');
+    // const [seniorsPensionersTaxOffset, setSeniorsPensionersTaxOffset] = useState('');
 
 
     const updateincomeTax = (value) => {setIncomeTax(value)}
@@ -16,7 +16,7 @@ function TaxCalculate(props) {
     const updatelowMiddleIncomeOffset = (value) => {setLowMiddleIncomeOffset(value)}
     const updatemedicareLevy = (value) => {setMedicareLevy(value)}
     const updatemedicareLevySurcharge = (value) => {setMedicareLevySurcharge(value)}
-    const updateseniorsPensionersTaxOffset = (value) => {setSeniorsPensionersTaxOffset(value)}
+    // const updateseniorsPensionersTaxOffset = (value) => {setSeniorsPensionersTaxOffset(value)}
 
 
     console.log(`\n%%%%%%%%%%\nTaxCalculate, props:\n%%%%%%%%%%`)
@@ -28,54 +28,35 @@ function TaxCalculate(props) {
         // if the data exists
         if (props.apiData) {
 
-            let isFamily = false // Checks if taxpayer has a spouse or children
-            isFamily = (props.formData.hasSpouse === true || props.formData.children >= 1)
-            const familyAttrib = isFamily ? "families" : "single"
 
-            console.log(isFamily)
+            //Prepare Brackets
+            // const p = Promise.all(props.apiData.map((taxTypeInx) => props.apiData[taxTypeInx][props.formData.year]));   // Store each Promise / Header in an array
+            const p = Promise.all(props.apiData.map((taxTypeInx) => taxTypeInx[props.formData.year]))
+            .then(([incomeTaxData, hecsData, litoData, lmitoData, medicareLevyData, medicareSurchargeData]) => {
+                try {
+                    //Arrow function expressions:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+                    const calculations = [  // 
+                           () => calculateIncomeTax(incomeTaxData, props.formData)
+                        ,  () => calculateHECS(hecsData, props.formData)
+                        ,  () => calculateLITO(litoData, props.formData)
+                        ,  () => calculateLMITO(lmitoData, props.formData)
+                        ,  () => calculateMedicareLevy(medicareLevyData, props.formData)
+                        ,  () => calculateMedicareSurcharge(medicareSurchargeData, props.formData)
+                    ];
+                    // Call all the functions at the same time
+                    // calculations.forEach((calculation) => logResult(calculation()));
+                    updateincomeTax(calculations[0]);
+                    updatehecsRepayment(calculations[1]);
+                    updatelowIncomeOffset(calculations[2]);
+                    updatelowMiddleIncomeOffset(calculations[3]);
+                    updatemedicareLevy(calculations[4]);
+                    updatemedicareLevySurcharge(calculations[5]);
 
-
-            const Zincome = props.formData.income   // temp variables because I'm looking for errors and debugging
-            const Zyear =  props.formData.year
-            console.log(`Zincome=${Zincome}   Zyear=${Zyear}`)
-
-            const Zdata1 = props.apiData.response1  // Income Tax
-            const Zdata2 = props.apiData.response2  // HECS Repayment
-            const Zdata3 = props.apiData.response3  // Low income tax offset
-            const Zdata4 = props.apiData.response4  // Low medium income tax offset
-            const Zdata5 = props.apiData.response5  // Medicare Levy Reduction
-            const Zdata6 = props.apiData.response6  // Medicare Levy Surcharge
-            const Zdata7 = props.apiData.response7  // Seniors Pensioners Tax Offset
-
-
-            // I havent gotten the medicare API data because they are not year -> bracket structure. But these four are.
-            const brackets1 = Zdata1[Zyear]['brackets']  // Income Tax
-            const brackets2 = Zdata2[Zyear]['brackets']  // HECS Repayment
-            const brackets3 = Zdata3[Zyear]['brackets']  // Low income tax offset
-            const brackets4 = Zdata4[Zyear]['brackets']  // Low medium income tax offset
-            const brackets5 = Zdata5[Zyear][familyAttrib]['brackets']  // Medicare Levy Reduction
-            const brackets6 = Zdata6[Zyear][familyAttrib]['brackets']  // Medicare Levy Surcharge
-            const brackets7 = Zdata7[Zyear]['single']['brackets']  // Sapto
-        
-
-            // search through the tax brackets, get the applicable bracket and calculate the tax
-            const result1 = getTaxPayable(Zincome, Zyear, brackets1);   // Income Tax
-            const result2 = getHECSPayable(Zincome, Zyear, brackets2);   // HECS Repayment
-            const result3 = getLITOOffset(Zincome, Zyear, brackets3, result1);   // Low income tax offset
-            const result4 = getLMITOOffset(Zincome, Zyear, brackets4);   // Low medium income tax offset
-            const result5 = getMedicareReduction(Zincome, Zyear, brackets5);  // Medicare Levy Reduction
-            const result6 = getMedicareSurcharge(Zincome, Zyear, brackets6);  // Medicare Levy Surcharge
-            const result7 = getSeniorsPensionersTaxOffset(Zincome, Zyear, brackets7);  // Seniors Pensioners Tax Offset
-
-           
-            updateincomeTax(result1);
-            updatehecsRepayment(result2);
-            updatelowIncomeOffset(result3);
-            updatelowMiddleIncomeOffset(result4);
-            updatemedicareLevy(result5);
-            updatemedicareLevySurcharge(result6);
-            updateseniorsPensionersTaxOffset(result7);
-
+                }
+                catch (error) {
+                    throw new Error(`Something went wrong when running the calculations | Error: ${error}`);
+                };
+            })
         };
     };
 
@@ -85,76 +66,157 @@ function TaxCalculate(props) {
     }, []);
 
 
-
-    const getTaxPayable = (income, year, brackets) => {
-        console.log(`  income = ${income}    year = ${year}    brackets = ${brackets}`);
-        for (const {range, rate, baseAmount } of brackets) {
-            if (income >= range[0] && income <= range[1]) {
-                const result = ((income - range[0]) * rate) + baseAmount;
-                return result.toFixed(2)
-            };
+    function calculateIncomeTax(taxdata, formdata) {
+        console.log("Function: calculateIncomeTax")
+        // console.log(`  income = ${income}    year = ${year} `)
+    
+        try {
+            const { brackets } = taxdata
+            if (!brackets) {
+                throw new Error(`calculateIncomeTax: The API has no data for the year: ${formdata.year}`);
+            }
+    
+            for (const { range, rate, base } of brackets) {
+                if (formdata.income >= range[0] && formdata.income <= range[1]) {
+                    const result = ((formdata.income - range[0]) * rate) + base;
+                    return result.toFixed(2);
+                }
+            }
+        }
+        catch(error) {
+            console.log(error)
+            return 0.00
         };
-        return 0.00;
     };
-
-    const getHECSPayable = (income, year, brackets) => {
-
-        if (props.formData.isHECS) {
-            console.log(`  income = ${income}    year = ${year}    brackets = ${brackets}`);
-            for (const {range, rate} of brackets) {
-                if (income >= range[0] && income <= range[1]) {
-                    const result = income * rate;
-                    return Math.min(result, props.formData.amtHECS).toFixed(2);    // If hecs debt is lower than the repayment, return the hecs debt amount
+    
+    
+    function calculateHECS(taxdata, formdata) {
+        const hasHECS = true;
+        const hecsBalance = 60000;
+        console.log("Function: calculateHECS");
+    
+        try {
+            if (hasHECS) {
+                const { brackets } = taxdata
+                if (!brackets) {
+                    throw new Error(`calculateHECS: The API has no data for the year: ${formdata.year}`);
+                }
+                for (const {range, rate} of brackets) {
+                    if (formdata.income >= range[0] && formdata.income <= range[1]) {
+                        const result = formdata.income * rate;
+                        return Math.min(result, hecsBalance).toFixed(2);    // If hecs debt is lower than the repayment, return the hecs debt amount
+                    };
                 };
             };
+            return 0.00;
+        }
+        catch(error) {
+            console.log(error)
+            return 0.00
         };
-        return 0.00;
     };
-
-    const getLITOOffset = (income, year, brackets, taxableInc) => {
-        // Caculate Income Tax and Medicare.
-        // Calculate the two offsets
-        // Compare the tax payable against the offsets. Made adjustments if tax goes down to zero
-        console.log(`  income = ${income}    year = ${year}    brackets = ${brackets}`);
-        for (const {range, base, pctAdj} of brackets) {
-            if (income >= range[0] && income <= range[1]) {
-                const result = base + ((income - range[0]) * pctAdj);
-                console.log("LITO Result: ", result,"  Income Tax: ", taxableInc );
-                return Math.min(result, taxableInc ).toFixed(2) ; // If offset is less than tax payable, return offset amount
+    
+    
+    function calculateLITO(taxdata, formdata) {
+        console.log("Function: calculateLITO");
+        try {
+            const { brackets } = taxdata
+            if (!brackets) {
+                throw new Error(`calculateLITO: The API has no data for the year: ${formdata.year}`);
+            }
+            for (const {range, base, pctAdj} of brackets) {
+                if (formdata.income >= range[0] && formdata.income <= range[1]) {
+                    // console.log(`LITO MATH:   income=${income}  |  range=${range}  |  base=${base}  |  pctAdj=${pctAdj}`)
+                    const result = base - ((formdata.income - range[0]) * pctAdj);
+                    return result.toFixed(2);  
+                };
             };
+        }
+        catch(error) {
+            console.log(error)
+            return 0.00
         };
-        return 0.00;
     };
-
-    const getLMITOOffset = (income, year, brackets) => {
-        // Caculate Income Tax and Medicare.
-        // Calculate the two offsets
-        // Compare the tax payable against the offsets. Made adjustments if tax goes down to zero
-        console.log(`  income = ${income}    year = ${year}    brackets = ${brackets}`);
-        for (const {range, base, pctAdj} of brackets) {
-            if (income >= range[0] && income <= range[1]) {
-                const result = base + ((income - range[0]) * pctAdj);
-                return result.toFixed(2);
+    
+    
+    function calculateLMITO(taxdata, formdata) {
+        console.log("Function: calculateLMITO");
+        try {
+            const { brackets } = taxdata 
+            if (!brackets) {
+                throw new Error(`calculateLMITO: The API has no data for the year: ${formdata.year}`);
+            }
+            if (!brackets[0]) {return 0.00} // there were no LMITO brackets for this particular year
+            for (const {range, base, pctAdj} of brackets) {
+                if (formdata.income >= range[0] && formdata.income <= range[1]) {
+                    // console.log(`LMITO MATH:   income=${income}  |  range=${range}  |  base=${base}  |  pctAdj=${pctAdj}`);
+                    const result = base - ((formdata.income - range[0]) * pctAdj);
+                    return result.toFixed(2);  
+                };
             };
+        }
+        catch(error) {
+            console.log(error)
+            return 0.00
         };
-        return 0.00;
     };
-
-    const getMedicareReduction = (income, year, brackets) => {
-        return 3000;
-    }
-    const getMedicareSurcharge = (income, year, brackets) => {
-        // Detect upper limits
-        // Check for family flag
-
-        const isFamily = false
-
-
-        return 4000;
-    }
-    const getSeniorsPensionersTaxOffset = (income, year, brackets) => {
-        return 5000;
-    }
+    
+    
+    function calculateMedicareLevy(taxdata, formdata) {
+        console.log("Function: calculateMedicareReduction")
+        // console.log(`  income = ${income}    year = ${year}    data = ${JSON.stringify(data)}`);
+        try {
+            const saptoString = formdata.pensionerAttrib? "pensioners":"non-pensioners";
+            const familyString = formdata.familyAttrib? "families":"single";
+    
+            const { brackets } = taxdata[saptoString][familyString]; 
+            if (!brackets) {
+                throw new Error(`calculateMedicareReduction: The API has no data for the year: ${formdata.year}`);
+            }
+            for (const {range, rate, special} of brackets) {
+                if (formdata.income >= range[0] && formdata.income <= range[1]) {
+                    // console.log(`MEDICARE RED MATH:   income=${income}  |  range=${range}  |  rate=${rate}  |  tier=${tier}  |  saptoString=${saptoString}  |  familyString=${familyString}`);
+                    let result = null;
+                    if (special) {
+                        result = ((formdata.income - range[0]) * 0.10)   //if middle bracket, we take the difference and then 10% for medicare
+                    } else {
+                        result = formdata.income * rate
+                    }
+                    return result.toFixed(2);  
+                };
+            };
+    
+        }
+        catch(error) {
+            console.log(error)
+            return 0.00
+        };
+    };
+    
+    // formdata.income
+    function calculateMedicareSurcharge(taxdata, formdata) {
+        console.log("Function: calculateMedicareSurcharge")
+        // console.log(`  income = ${income}    year = ${year}    data = ${JSON.stringify(data)}`);
+        try {
+            const familyString = formdata.familyAttrib? "families":"single";
+    
+            const { brackets } = taxdata[familyString]; 
+            if (!brackets) {
+                throw new Error(`calculateMedicareSurcharge: The API has no data for the year: ${formdata.year}`);
+            }
+            for (const {range, rate, tier} of brackets) {
+                if (formdata.income >= range[0] && formdata.income <= range[1]) {
+                    // console.log(`MEDICARE SUR MATH:   income=${income}  |  range=${range}  |  rate=${rate}  |  tier=${tier}  |  familyString=${familyString}`);
+                    const result = formdata.income * rate
+                    return result.toFixed(2);  
+                };
+            };
+        }
+        catch(error) {
+            console.log(error)
+            return 0.00
+        };
+    };
 
     return (
         <div className="results-container">
@@ -162,10 +224,9 @@ function TaxCalculate(props) {
             <li><strong>Income Tax:</strong> {incomeTax}</li>
             <li><strong>HECS Repayment:</strong> {hecsRepayment}</li>
             <li><strong>Low Income Tax Offset:</strong> {lowIncomeOffset}</li>
-            <li><strong>Low Middle Income Tax Offset:</strong> {lowMiddleIncomeOffset} CURRENTLY WIP</li>
-            <li><strong>getMedicareReduction:</strong> {medicareLevy} CURRENTLY WIP</li>
-            <li><strong>getMedicareSurcharge:</strong> {medicareLevySurcharge} CURRENTLY WIP</li>
-            <li><strong>getSeniorsPensionersTaxOffset:</strong> {seniorsPensionersTaxOffset} CURRENTLY WIP</li>
+            <li><strong>Low Middle Income Tax Offset:</strong> {lowMiddleIncomeOffset}</li>
+            <li><strong>getMedicareReduction:</strong> {medicareLevy}</li>
+            <li><strong>getMedicareSurcharge:</strong> {medicareLevySurcharge}</li>
             </ul>   
         </div>
     );

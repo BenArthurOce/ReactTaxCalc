@@ -3,33 +3,33 @@ import React, { useState } from 'react';
 function TaxForm(props) {
     const [taxationYear, setTaxationYear] = useState('');
     const [taxableIncome, setTaxableIncome] = useState('');
+    const [age, setAge] = useState('');
     const [hasSpouse, setHasSpouse] = useState('');
     const [spousesIncome, setSpousesIncome] = useState('');
     const [numberOfChildren, setNumberOfChildren] = useState(1);
     const [hasHECSDebt, setHasHECSDebt] = useState(false);
     const [hecsDebtAmount, setHECSDebtAmount] = useState('');
+    const [hasPrivateHealth, setHasPrivateHealth] = useState('');
+
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        // console.log('Form submitted!');
-        // console.log('Taxation Year:', taxationYear);
-        // console.log('Taxable Income:', taxableIncome);
-        // console.log('Spouse\'s Income:', spousesIncome);
-        // console.log('Number of Children:', numberOfChildren);
-        // console.log('Has HECS Debt:', hasHECSDebt);
-        // console.log('HECS Debt Amount:', hecsDebtAmount);
 
         // Pass form data to parent component
         props.onFormSubmit({
              year: taxationYear
             ,income: taxableIncome
+            ,age: age
             ,hasSpouse: hasSpouse
             ,spousesIncome: spousesIncome
             ,children: numberOfChildren
             ,isHECS: hasHECSDebt
             ,amtHECS: hecsDebtAmount
+            ,hasPHI: hasPrivateHealth
+            ,familyTag: (hasSpouse || numberOfChildren>0)
+            ,isPreservationAge: (age >= 60) // not accurate, but simplying. Preservation age also needs gender
         });
-    }
+    };
 
     return (
     <form onSubmit={handleSubmit}>
@@ -69,6 +69,17 @@ function TaxForm(props) {
         </label>
         <br></br>
 
+        {/* Input Age */}
+        <label>
+            Your Age:
+            <input 
+                type="text" 
+                value={age} 
+                onChange={(e) => setAge(e.target.value)} 
+            />
+        </label>
+        <br></br>
+
         {/* Boolean for Spouse */}
         <label>
             Do you have a spouse?
@@ -98,7 +109,7 @@ function TaxForm(props) {
             <input 
                 type="number" 
                 value={numberOfChildren} 
-                min={1} 
+                min={0} 
                 max={8} 
                 onChange={(e) => setNumberOfChildren(parseInt(e.target.value, 10))} 
             />
@@ -126,6 +137,17 @@ function TaxForm(props) {
                 />
             </label>
         )}
+        <br></br>
+
+        {/* Boolean for Private Health Insurance */}
+        <label>
+            Do you have Private Health Insurance?
+            <input 
+                type="checkbox" 
+                checked={hasPrivateHealth} 
+                onChange={() => setHasPrivateHealth(!hasPrivateHealth)} 
+            />
+        </label>
         <br></br>
 
         {/* Form submit button */}

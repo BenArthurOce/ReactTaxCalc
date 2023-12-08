@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TaxForm from "./Components/TaxForm.js"
-import TaxRequest from "./Components/TaxCalculate.js"
+import TaxRequest from "./Components/TaxRequest.js"
 
 function TaxFrontend() {
 
