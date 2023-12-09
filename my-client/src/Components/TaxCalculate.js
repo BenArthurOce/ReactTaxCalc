@@ -7,6 +7,7 @@ function TaxCalculate(props) {
     const [lowMiddleIncomeOffset, setLowMiddleIncomeOffset] = useState('');
     const [medicareLevy, setMedicareLevy] = useState('');
     const [medicareLevySurcharge, setMedicareLevySurcharge] = useState('');
+    const [finalTaxPayable, setFinalTaxPayable] = useState('');
     // const [seniorsPensionersTaxOffset, setSeniorsPensionersTaxOffset] = useState('');
 
 
@@ -193,7 +194,7 @@ function TaxCalculate(props) {
         };
     };
     
-    // formdata.income
+
     function calculateMedicareSurcharge(taxdata, formdata) {
         console.log("Function: calculateMedicareSurcharge")
         // console.log(`  income = ${income}    year = ${year}    data = ${JSON.stringify(data)}`);
@@ -218,16 +219,24 @@ function TaxCalculate(props) {
         };
     };
 
+    function calculateTotalTax(arg) {
+
+    }
+
     return (
         <div className="results-container">
+            <strong>Your Income:</strong> {props.formData.income}
+            <br></br>
             <ul>
-            <li><strong>Income Tax:</strong> {incomeTax}</li>
-            <li><strong>HECS Repayment:</strong> {hecsRepayment}</li>
-            <li><strong>Low Income Tax Offset:</strong> {lowIncomeOffset}</li>
-            <li><strong>Low Middle Income Tax Offset:</strong> {lowMiddleIncomeOffset}</li>
-            <li><strong>getMedicareReduction:</strong> {medicareLevy}</li>
-            <li><strong>getMedicareSurcharge:</strong> {medicareLevySurcharge}</li>
-            </ul>   
+                <li><strong>Income Tax:</strong> {incomeTax}</li>
+                <li><strong>HECS Repayment:</strong> {hecsRepayment}</li>
+                <li><strong>Low Income Tax Offset:</strong> {lowIncomeOffset}</li>
+                <li><strong>Low Middle Income Tax Offset:</strong> {lowMiddleIncomeOffset}</li>
+                <li><strong>getMedicareReduction:</strong> {medicareLevy}</li>
+                <li><strong>getMedicareSurcharge:</strong> {medicareLevySurcharge}</li>
+            </ul>
+            <br></br>
+            <strong>Tax Payable: </strong>
         </div>
     );
 }

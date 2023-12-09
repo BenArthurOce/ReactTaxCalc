@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import TaxFrontend from './TaxFrontend.js';
-// import './App.css';
+import './App.css';
 
 
 

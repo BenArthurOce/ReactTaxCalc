@@ -79,14 +79,14 @@ function TaxRequest(props) {
             <h2>Calculation Results</h2>
 
             {/* conditional rendering */}
-            {loadingFlag && <p>Loading Results</p>}
+            {/* {loadingFlag && <p>Loading Results</p>}
             {errorFlags.incomeTax && <p>Error loading Income Tax results</p>}
             {errorFlags.hecsRepayment && <p>Error loading HECS Repayment results</p>}
             {errorFlags.lowIncomeOffset && <p>Error loading Low Income Tax Offset results</p>}
             {errorFlags.lowMiddleIncomeOffset && <p>Error loading Low Middle Income Tax Offset results</p>}
             {errorFlags.medicareLevyReduction && <p>Error loading Medicare Levy Reduction results</p>}
             {errorFlags.medicareLevySurcharge && <p>Error loading Medicare Levy Surcharge results</p>}
-            {errorFlags.seniorsPensionersTaxOffset && <p>Error loading Seniors and Pensioners Tax Offset results</p>}
+            {errorFlags.seniorsPensionersTaxOffset && <p>Error loading Seniors and Pensioners Tax Offset results</p>} */}
             {apiData && (
                 <TaxCalculate
                 apiData={apiData}

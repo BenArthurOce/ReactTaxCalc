@@ -1,78 +1,61 @@
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+#wrapper {
     background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: left;
+    padding: 20px;
 }
 
-h1 {
+#form {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    padding: 10px;
+}
+
+
+.form-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add margin for spacing between lines */
+}
+
+.form-line label {
+    width: 80%; /* Set the width for labels (adjust as needed) */
+    margin-right: 10px; /* Add margin between label and input */
+}
+
+.form-line input,
+.form-line select {
+    flex: 1; /* Expand to fill the remaining space */
+    width: 100%; /* Make sure the input fills the available space */
     text-align: center;
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
+#results {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    padding: 10px;
 }
 
-select,
-input {
-    width: 100%;
-    padding: 8px;
-    margin: 4px 0 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+.li {
+    padding: 10px;
 }
 
 button {
     background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-/* button:hover {
+button:hover {
     background-color: #45a049;
-}
-   */
-
-
-.results-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.results-container ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.results-container li {
-    margin-bottom: 10px;
-}
-
-/* Add spacing between text and number value */
-.results-container li strong {
-    margin-right: 8px; /* Adjust the margin as needed */
-}
-
-h2 {
-    color: #333;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 10px;
 }

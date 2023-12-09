@@ -37,34 +37,33 @@ function TaxFrontend() {
     };
     
 
-
-
-    
-
     return (
-        <div>
-            <h1>COMPONENT: TaxFrontEnd</h1>
-            <TaxForm onFormSubmit={performFormState} />
-            
-            {loadingFlag && <p>Loading...</p>}
+        <div id="wrapper">
+            <section id="form">
+                <TaxForm onFormSubmit={performFormState} />
+            </section>
 
-            {!loadingFlag && result ? (
+                {/* {loadingFlag && <p>Loading...</p>}
+
+                {!loadingFlag && result ? (
                 <div>
-                    <h2>Calculation Results:</h2>
-                    <p>{result}</p>
+                <h2>Calculation Results:</h2>
+                <p>{result}</p>
                 </div>
-            ) : (
+                ) : (
                 !loadingFlag && <p>Please submit a tax form to see results.</p>
-            )}
+                )} */}
 
-            {formData && (
-                <TaxRequest
-                formData={formData}
-                onAPIRequest={performResultState}
-                onError={performErrorState}
-                onUpdateRequests={(newResult) => setResult(newResult)}    //get the calculated tax from TaxRequest, store as a state
-                />
-            )}
+            <section id="results">
+                {formData && (      
+                    <TaxRequest
+                    formData={formData}
+                    onAPIRequest={performResultState}
+                    onError={performErrorState}
+                    onUpdateRequests={(newResult) => setResult(newResult)}    //get the calculated tax from TaxRequest, store as a state
+                    />     
+                )}
+            </section>
         </div>
     );
 };
