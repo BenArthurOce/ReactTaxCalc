@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaxCalculate from './TaxCalculate';
 
 
-function TaxRequest(props) {
+function TaxRequest({ formData, onUpdateRequests }) {
 
     const [apiData, setApiData] = useState(null);
     const [loadingFlag, setLoadingFlag] = useState(false);
@@ -75,7 +75,7 @@ function TaxRequest(props) {
     return (
 
         <div>
-            <h1>COMPONENT: TaxCalculation</h1>
+            <h1>COMPONENT: TaxRequest</h1>
             <h2>Calculation Results</h2>
 
             {/* conditional rendering */}
@@ -90,8 +90,8 @@ function TaxRequest(props) {
             {apiData && (
                 <TaxCalculate
                 apiData={apiData}
-                formData={props.formData}
-                onUpdateRequests={props.onUpdateRequests} 
+                formData={formData}
+                onUpdateRequests={onUpdateRequests} 
                 />
             )}
         </div>

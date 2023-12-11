@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import TaxForm from "./Components/TaxForm.js"
 import TaxRequest from "./Components/TaxRequest.js"
+import DropDownOpts from "./Components/DropDownOpts.js"
+import DropDownResults from "./Components/DropDownResults.js"
 
 function TaxFrontend() {
 
@@ -8,6 +10,18 @@ function TaxFrontend() {
     const [result, setResult] = useState(null);
     const [loadingFlag, setLoadingFlag] = useState(false);
     const [errorFlag, setErrorFlag] = useState(null);
+
+
+    const [selectedHeader, setSelectedHeader] = useState('');
+    const [selectedYear, setSelectedYear] = useState('');
+  
+    const handleHeaderChange = (header) => {
+      setSelectedHeader(header);
+    };
+  
+    const handleYearChange = (year) => {
+      setSelectedYear(year);
+    };
 
 
     const performUpdateResult = (newResult) => {
@@ -64,6 +78,18 @@ function TaxFrontend() {
                     />     
                 )}
             </section>
+
+            <section id="info">
+
+                <DropDownOpts
+                onHeaderChange={handleHeaderChange}
+                onYearChange={handleYearChange}
+                />
+                <DropDownResults selectedHeader={selectedHeader} selectedYear={selectedYear} />
+   
+            </section>
+
+
         </div>
     );
 };

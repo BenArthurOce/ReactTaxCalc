@@ -1,69 +1,60 @@
 import React, { useState, useEffect } from 'react';
 
-function TaxCalculate(props) {
-    const [incomeTax, setIncomeTax] = useState('');
-    const [hecsRepayment, setHecsRepayment] = useState('');
-    const [lowIncomeOffset, setLowIncomeOffset] = useState('');
-    const [lowMiddleIncomeOffset, setLowMiddleIncomeOffset] = useState('');
-    const [medicareLevy, setMedicareLevy] = useState('');
-    const [medicareLevySurcharge, setMedicareLevySurcharge] = useState('');
-    const [finalTaxPayable, setFinalTaxPayable] = useState('');
+function TaxCalculate({ apiData, formData }) {
+    const [incomeTax, setIncomeTax] = useState(0);
+    const [hecsRepayment, setHecsRepayment] = useState(0);
+    const [lowIncomeOffset, setLowIncomeOffset] = useState(0);
+    const [lowMiddleIncomeOffset, setLowMiddleIncomeOffset] = useState(0);
+    const [medicareLevy, setMedicareLevy] = useState(0);
+    const [medicareLevySurcharge, setMedicareLevySurcharge] = useState(0);
+    const [finalTaxPayable, setFinalTaxPayable] = useState(0);
     // const [seniorsPensionersTaxOffset, setSeniorsPensionersTaxOffset] = useState('');
 
 
-    const updateincomeTax = (value) => {setIncomeTax(value)}
-    const updatehecsRepayment = (value) => {setHecsRepayment(value)}
-    const updatelowIncomeOffset = (value) => {setLowIncomeOffset(value)}
-    const updatelowMiddleIncomeOffset = (value) => {setLowMiddleIncomeOffset(value)}
-    const updatemedicareLevy = (value) => {setMedicareLevy(value)}
-    const updatemedicareLevySurcharge = (value) => {setMedicareLevySurcharge(value)}
-    // const updateseniorsPensionersTaxOffset = (value) => {setSeniorsPensionersTaxOffset(value)}
-
-
     console.log(`\n%%%%%%%%%%\nTaxCalculate, props:\n%%%%%%%%%%`)
-    console.log(props)
+    console.log(apiData, formData)
 
  
-    const calculateTax = () => {
+    const calculateEachTax = () => {
 
         // if the data exists
-        if (props.apiData) {
+        if (apiData) {
 
-
-            //Prepare Brackets
-            // const p = Promise.all(props.apiData.map((taxTypeInx) => props.apiData[taxTypeInx][props.formData.year]));   // Store each Promise / Header in an array
-            const p = Promise.all(props.apiData.map((taxTypeInx) => taxTypeInx[props.formData.year]))
+            //Prepare Brackets  // Store each Promise / Header in an array
+            const p = Promise.all(apiData.map((taxTypeInx) => taxTypeInx[formData.year]))
             .then(([incomeTaxData, hecsData, litoData, lmitoData, medicareLevyData, medicareSurchargeData]) => {
                 try {
                     //Arrow function expressions:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
                     const calculations = [  // 
-                           () => calculateIncomeTax(incomeTaxData, props.formData)
-                        ,  () => calculateHECS(hecsData, props.formData)
-                        ,  () => calculateLITO(litoData, props.formData)
-                        ,  () => calculateLMITO(lmitoData, props.formData)
-                        ,  () => calculateMedicareLevy(medicareLevyData, props.formData)
-                        ,  () => calculateMedicareSurcharge(medicareSurchargeData, props.formData)
+                        calculateIncomeTax(incomeTaxData, formData)
+                        , calculateHECS(hecsData, formData)
+                        , calculateLITO(litoData, formData)
+                        , calculateLMITO(lmitoData, formData)
+                        , calculateMedicareLevy(medicareLevyData, formData)
+                        , calculateMedicareSurcharge(medicareSurchargeData, formData)
                     ];
                     // Call all the functions at the same time
-                    // calculations.forEach((calculation) => logResult(calculation()));
-                    updateincomeTax(calculations[0]);
-                    updatehecsRepayment(calculations[1]);
-                    updatelowIncomeOffset(calculations[2]);
-                    updatelowMiddleIncomeOffset(calculations[3]);
-                    updatemedicareLevy(calculations[4]);
-                    updatemedicareLevySurcharge(calculations[5]);
-
+                    setIncomeTax(calculations[0]);
+                    setHecsRepayment(calculations[1]);
+                    setLowIncomeOffset(calculations[2]);
+                    setLowMiddleIncomeOffset(calculations[3]);
+                    setMedicareLevy(calculations[4]);
+                    setMedicareLevySurcharge(calculations[5]);
+                    calculateTotalTax(calculations)
                 }
                 catch (error) {
                     throw new Error(`Something went wrong when running the calculations | Error: ${error}`);
                 };
             })
+            // .finally(() => {
+            //     calculateTotalTax()
+            // });
         };
     };
 
 
     useEffect(() => {
-        calculateTax();
+        calculateEachTax();
     }, []);
 
 
@@ -150,9 +141,9 @@ function TaxCalculate(props) {
             if (!brackets[0]) {return 0.00} // there were no LMITO brackets for this particular year
             for (const {range, base, pctAdj} of brackets) {
                 if (formdata.income >= range[0] && formdata.income <= range[1]) {
-                    // console.log(`LMITO MATH:   income=${income}  |  range=${range}  |  base=${base}  |  pctAdj=${pctAdj}`);
+                    console.log(`LMITO MATH:   income=${formdata.income}  |  range=${range}  |  base=${base}  |  pctAdj=${pctAdj}`);
                     const result = base - ((formdata.income - range[0]) * pctAdj);
-                    return result.toFixed(2);  
+                    return result
                 };
             };
         }
@@ -197,6 +188,9 @@ function TaxCalculate(props) {
 
     function calculateMedicareSurcharge(taxdata, formdata) {
         console.log("Function: calculateMedicareSurcharge")
+
+        console.log(formData.hasPHI)
+        if (formData.hasPHI) {return 0}
         // console.log(`  income = ${income}    year = ${year}    data = ${JSON.stringify(data)}`);
         try {
             const familyString = formdata.familyAttrib? "families":"single";
@@ -219,24 +213,46 @@ function TaxCalculate(props) {
         };
     };
 
-    function calculateTotalTax(arg) {
+    function calculateTotalTax(calculations) {
 
-    }
+
+        console.log("calculateTotalTax")
+        const [incomeTax, hecsRepayment,  lowIncomeOffset, lowMiddleIncomeOffset, medicareLevy, medicareLevySurcharge] = calculations.map(Number);
+
+        console.log(`
+            incomeTax = ${incomeTax}
+            hecsRepayment = ${hecsRepayment}
+            medicareLevy = ${medicareLevy}
+            medicareLevySurcharge = ${medicareLevySurcharge}
+            lowIncomeOffset = ${lowIncomeOffset}
+            lowMiddleIncomeOffset = ${lowMiddleIncomeOffset}
+        `);
+
+        //If taxable income is low enough, the low income tax offset must match it
+        if (lowIncomeOffset >= incomeTax) {
+            setLowIncomeOffset(incomeTax)
+        }
+
+        const finalTaxPayable = incomeTax + hecsRepayment + medicareLevy + medicareLevySurcharge - lowIncomeOffset - lowMiddleIncomeOffset
+        // const finalTaxPayable = incomeTax + hecsRepayment + medicareLevy - lowIncomeOffset - lowMiddleIncomeOffset
+        setFinalTaxPayable(finalTaxPayable.toFixed(2))
+
+    };
 
     return (
         <div className="results-container">
-            <strong>Your Income:</strong> {props.formData.income}
+            <strong>Your Income:</strong> {formData.income}
             <br></br>
             <ul>
                 <li><strong>Income Tax:</strong> {incomeTax}</li>
                 <li><strong>HECS Repayment:</strong> {hecsRepayment}</li>
                 <li><strong>Low Income Tax Offset:</strong> {lowIncomeOffset}</li>
                 <li><strong>Low Middle Income Tax Offset:</strong> {lowMiddleIncomeOffset}</li>
-                <li><strong>getMedicareReduction:</strong> {medicareLevy}</li>
-                <li><strong>getMedicareSurcharge:</strong> {medicareLevySurcharge}</li>
+                <li><strong>Medicare Levy:</strong> {medicareLevy}</li>
+                <li><strong>Medicare Surcharge:</strong> {medicareLevySurcharge}</li>
             </ul>
             <br></br>
-            <strong>Tax Payable: </strong>
+            <strong>Tax Payable:  {finalTaxPayable} </strong>
         </div>
     );
 }
