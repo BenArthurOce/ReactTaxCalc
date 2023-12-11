@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 function TaxForm(props) {
     const [isEnforce, setIsEnforce]  = useState(false);     // If ticked, the form will do validation checks
-    const [taxationYear, setTaxationYear] = useState(2023);
-    const [taxableIncome, setTaxableIncome] = useState(50000);
+    const [taxationYear, setTaxationYear] = useState();
+    const [taxableIncome, setTaxableIncome] = useState('');
     const [age, setAge] = useState('');
     const [hasSpouse, setHasSpouse] = useState(false);
     const [spousesIncome, setSpousesIncome] = useState('');
@@ -12,70 +12,114 @@ function TaxForm(props) {
     const [hecsDebtAmount, setHECSDebtAmount] = useState('');
     const [hasPrivateHealth, setHasPrivateHealth] = useState(false);
 
+    function isNumber(ev) {
+        return !isNaN(ev.target.value.slice(-1));
+    };
+
+    function validateForm(ev) {
+        ev.preventDefault();
+        let isValid = true;
+
+        if (isEnforce ) {
+            if(taxationYear==="") {isValid=false};
+            if(taxableIncome==="") {isValid=false};
+            if(age==="") {isValid=false};
+            if(hasSpouse===true && spousesIncome==="") {isValid=false};
+            if(hasHECSDebt===true && hecsDebtAmount==="" ) {isValid=false};
+        }
+        
+        if (isValid) {
+            handleSubmit(ev)
+        } else {
+            alert("YA MESSED UP")
+        };
+    };
 
     const setTaxationYear_handle = (ev) => {
         ev.preventDefault();
-        if(isEnforce) {console.log("hi")}
         setTaxationYear(ev.target.value)
     };
     
     const setTaxableIncome_handle = (ev) => {
         ev.preventDefault()
-        console.log(ev.key)
-        console.log(ev.code)
-        console.log(ev.target.value)
-        console.log(ev.target.code)
-        console.log(ev.target.value[-1])
-        if(isEnforce) {}
-        setTaxableIncome(ev.target.value)
+        if(isEnforce) {
+            if(isNumber(ev)) {
+                setTaxableIncome(ev.target.value);
+            };
+        }
+        else {
+            setTaxableIncome(ev.target.value);   // There is no validation check. Input the value
+        };
     };
 
     const setAge_handle = (ev) => {
-        ev.preventDefault();
-        if(isEnforce) {}
-        setAge(ev.target.value);
+        ev.preventDefault()
+        if(isEnforce) {
+            if(isNumber(ev)) {
+                setAge(ev.target.value);
+            };
+        }
+        else {
+            setAge(ev.target.value);  // There is no validation check. Input the value
+        };
     };
 
     const setHasSpouse_handle = (ev) => {
         ev.preventDefault();
-        if(isEnforce) {}
-        if (!ev.target.checked) {setSpousesIncome('');}
+        if (!ev.target.checked) {setSpousesIncome('');} // if the "do you have spouse" box is unticked, set the spouse income to nothing
         setHasSpouse(!hasSpouse);
     };
 
     const setSpousesIncome_handle = (ev) => {
-        ev.preventDefault();
-        if(isEnforce) {}
-        setSpousesIncome(ev.target.value);
+        ev.preventDefault()
+        if(isEnforce) {
+            if(isNumber(ev)) {
+                setSpousesIncome(ev.target.value);
+            };
+        }
+        else {
+            setSpousesIncome(ev.target.value);  // There is no validation check. Input the value
+        };
     };
 
     const setNumberOfChildren_handle = (ev) => {
-        ev.preventDefault();
-        if(isEnforce) {}
-        setNumberOfChildren(ev.target.value);
+        ev.preventDefault()
+        console.log(ev.target.value)
+        if(isEnforce) {
+            if(isNumber(ev)) {
+                setNumberOfChildren(ev.target.value);
+            };
+        }
+        else {
+            setNumberOfChildren(ev.target.value);  // There is no validation check. Input the value
+        };
     };
 
     const setHasHECSDebt_handle = (ev) => {
         ev.preventDefault();
-        if(isEnforce) {}
-        if (!ev.target.checked) {setHECSDebtAmount('');}
+        if (!ev.target.checked) {setHECSDebtAmount('');} ;   // if the "do you have a hecs debt" box is unticked, set the hecs debt to nothing
         setHasHECSDebt(!hasHECSDebt);
     };
 
     const setHECSDebtAmount_handle = (ev) => {
-        ev.preventDefault();
-        if(isEnforce) {}
-        setHECSDebtAmount(ev.target.value);
+        ev.preventDefault()
+        if(isEnforce) {
+            if(isNumber(ev)) {
+                setHECSDebtAmount(ev.target.value);
+            };
+        }
+        else {
+            setHECSDebtAmount(ev.target.value);  // There is no validation check. Input the value
+        };
     };
+
 
     const setHasPrivateHealth_handle = (ev) => {
         ev.preventDefault();
-        if(isEnforce) {}
         setHasPrivateHealth(!hasPrivateHealth);
     };
     
  
-
     const handleSubmit = (ev) => {
         ev.preventDefault();
 
@@ -95,10 +139,10 @@ function TaxForm(props) {
         });
     };
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <h1>COMPONENT: TaxForm</h1>
 
+    return (
+      <form onSubmit={validateForm}>
+        <h1>COMPONENT: TaxForm</h1>
 
         {/* Boolean for Validation Checks */}
         <div className="form-line">
@@ -107,7 +151,7 @@ function TaxForm(props) {
                 type="checkbox"
                 id="isEnforce"
                 value={isEnforce}
-                onKeyDown={(e) => setIsEnforce(!isEnforce)}
+                onChange={(e) => setIsEnforce(!isEnforce)}
             />
         </div>
 
@@ -132,8 +176,6 @@ function TaxForm(props) {
                     <option value="2010">2010</option>
             </select>
         </div>
-
-
 
         {/* Input Taxable Income */}
         <div className="form-line">
@@ -187,11 +229,9 @@ function TaxForm(props) {
         <div className="form-line">
             <label htmlFor="numberOfChildren">Number of Children:</label>
             <input
-                type="number"
+                type="text"
                 id="numberOfChildren"
                 value={numberOfChildren}
-                min={0} 
-                max={10} 
                 onChange={(e) => setNumberOfChildren_handle(e)}
             />
         </div>
