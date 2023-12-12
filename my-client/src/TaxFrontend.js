@@ -7,14 +7,12 @@ import DropDownResults from "./Components/DropDownResults.js"
 function TaxFrontend() {
 
     const [formData, setFormData] = useState(null);
-    const [result, setResult] = useState(null);
-    const [loadingFlag, setLoadingFlag] = useState(false);
-    const [errorFlag, setErrorFlag] = useState(null);
-
+    const [waitingFlag, setWaitingFlag] = useState(null);
 
     const [selectedHeader, setSelectedHeader] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
-  
+
+
     const handleHeaderChange = (header) => {
       setSelectedHeader(header);
     };
@@ -24,71 +22,60 @@ function TaxFrontend() {
     };
 
 
-    const performUpdateResult = (newResult) => {
-        setResult(newResult);
+    const triggerFormSubmitted = (newFormData) => {
+        setFormData(newFormData);
+        setWaitingFlag(false)   // The blocker to loading the tax calculations is now removed
     }
 
+    const triggerFormReset = () => {
+        console.log("reset")
+        setFormData(null);
+        setWaitingFlag(true) 
+    }
 
-    const performFormState = (newFormData) => {
-        console.log("TaxForm - Form data updated:", newFormData);
-        setFormData(newFormData);
-        setResult(null);
-        setLoadingFlag(true);
-        setErrorFlag(null);
-    };
+    const triggerDebug = () => {
+        console.log("debug") 
+    }
 
-
-    const performResultState = (resultData) => {
-        console.log("TaxFrontend - Result data received:", resultData);
-        setResult(resultData);
-        setLoadingFlag(false);
-    };
-    
-    const performErrorState = (error) => {
-        console.log("TaxFrontend - Error occurred:", error);
-        setErrorFlag(error);
-        setLoadingFlag(false);
-    };
     
 
     return (
         <div id="wrapper">
             <section id="form">
-                <TaxForm onFormSubmit={performFormState} />
+                <TaxForm onFormSubmit={triggerFormSubmitted}
+                />
+                 <button onClick={triggerFormReset}>Reset</button> 
+                 <button onClick={triggerDebug}>Debug</button> 
             </section>
 
-                {/* {loadingFlag && <p>Loading...</p>}
 
-                {!loadingFlag && result ? (
-                <div>
-                <h2>Calculation Results:</h2>
-                <p>{result}</p>
-                </div>
-                ) : (
-                !loadingFlag && <p>Please submit a tax form to see results.</p>
-                )} */}
+            {/* if the waiting flag is false, and the formData from TaxForm has data, then run the request */}
+            {!waitingFlag && formData ? (
+                <section id="results">
+                    {formData && (      
+                        <TaxRequest
+                        formData={formData}
+                        />     
+                    )}
+                </section>
+            ) : (
+                <section id="results">
+                    {<p>Waiting on user to complete input form</p>}
+                </section>
+            )}
+            {/* Otherwise just tell the user that input is waiting to be loaded into the TaxForm */}
 
-            <section id="results">
-                {formData && (      
-                    <TaxRequest
-                    formData={formData}
-                    onAPIRequest={performResultState}
-                    onError={performErrorState}
-                    onUpdateRequests={(newResult) => setResult(newResult)}    //get the calculated tax from TaxRequest, store as a state
-                    />     
-                )}
-            </section>
 
             <section id="info">
-
                 <DropDownOpts
-                onHeaderChange={handleHeaderChange}
-                onYearChange={handleYearChange}
+                    onHeaderChange={handleHeaderChange}
+                    onYearChange={handleYearChange}
                 />
-                <DropDownResults selectedHeader={selectedHeader} selectedYear={selectedYear} />
-   
+                <DropDownResults 
+                    selectedHeader={selectedHeader} 
+                    selectedYear={selectedYear} 
+                />
             </section>
-
 
         </div>
     );

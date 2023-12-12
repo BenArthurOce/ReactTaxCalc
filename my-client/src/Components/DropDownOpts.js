@@ -6,8 +6,9 @@ const DropDownOpts = ({ onHeaderChange, onYearChange }) => {
     const [selectedHeader, setSelectedHeader] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
 
-    const url = "https://benarthuroce.github.io/TaxRatesJSON/atoJSON.json";
 
+    //Run the API to get the tax
+    const url = "https://benarthuroce.github.io/TaxRatesJSON/atoJSON.json";
     useEffect(() => {
         fetch(url)
             .then((response) => {
@@ -32,19 +33,20 @@ const DropDownOpts = ({ onHeaderChange, onYearChange }) => {
     const setSelectedHeader_handle = (e) => {
         const newHeader = e.target.value;
         setSelectedHeader(newHeader);
-        onHeaderChange(newHeader); // Notify the parent component about the header change
+        onHeaderChange(newHeader); // Notify the parent component (DropDownResults) about the header change
     };
 
     const setSelectedYear_handle = (e) => {
         const newYear = e.target.value;
         setSelectedYear(newYear);
-        onYearChange(newYear); // Notify the parent component about the year change
+        onYearChange(newYear); // Notify the parent component (DropDownResults) about the year change
     };
 
     return (
         <div>
             <label htmlFor="objectKeys">Select a header:</label>
             <select id="objectKeys" onChange={setSelectedHeader_handle} value={selectedHeader}>
+            <option value="">Select a tax type:</option>
                 {objectKeys.map((key) => (
                     <option key={key} value={key}>
                         {key}

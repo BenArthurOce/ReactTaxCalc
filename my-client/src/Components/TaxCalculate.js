@@ -24,7 +24,6 @@ function TaxCalculate({ apiData, formData }) {
             const p = Promise.all(apiData.map((taxTypeInx) => taxTypeInx[formData.year]))
             .then(([incomeTaxData, hecsData, litoData, lmitoData, medicareLevyData, medicareSurchargeData]) => {
                 try {
-                    //Arrow function expressions:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
                     const calculations = [  // 
                         calculateIncomeTax(incomeTaxData, formData)
                         , calculateHECS(hecsData, formData)
@@ -230,11 +229,17 @@ function TaxCalculate({ apiData, formData }) {
 
         //If taxable income is low enough, the low income tax offset must match it
         if (lowIncomeOffset >= incomeTax) {
-            setLowIncomeOffset(incomeTax)
-        }
+            setLowIncomeOffset(incomeTax);
+        };
 
-        const finalTaxPayable = incomeTax + hecsRepayment + medicareLevy + medicareLevySurcharge - lowIncomeOffset - lowMiddleIncomeOffset
+        if (lowMiddleIncomeOffset >= incomeTax-lowIncomeOffset) {
+            setLowMiddleIncomeOffset(incomeTax-lowIncomeOffset);
+        };
+
+
+        let finalTaxPayable = incomeTax + hecsRepayment + medicareLevy + medicareLevySurcharge - lowIncomeOffset - lowMiddleIncomeOffset;
         // const finalTaxPayable = incomeTax + hecsRepayment + medicareLevy - lowIncomeOffset - lowMiddleIncomeOffset
+        finalTaxPayable = Math.max(finalTaxPayable, 0)
         setFinalTaxPayable(finalTaxPayable.toFixed(2))
 
     };

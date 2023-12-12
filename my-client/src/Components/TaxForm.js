@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 
 function TaxForm(props) {
     const [isEnforce, setIsEnforce]  = useState(false);     // If ticked, the form will do validation checks
-    const [taxationYear, setTaxationYear] = useState();
+    const [taxationYear, setTaxationYear] = useState(2023);
     const [taxableIncome, setTaxableIncome] = useState('');
     const [age, setAge] = useState('');
     const [hasSpouse, setHasSpouse] = useState(false);
     const [spousesIncome, setSpousesIncome] = useState('');
-    const [numberOfChildren, setNumberOfChildren] = useState(0);
+    const [numberOfChildren, setNumberOfChildren] = useState('');
     const [hasHECSDebt, setHasHECSDebt] = useState(false);
     const [hecsDebtAmount, setHECSDebtAmount] = useState('');
     const [hasPrivateHealth, setHasPrivateHealth] = useState(false);
+
 
     function isNumber(ev) {
         return !isNaN(ev.target.value.slice(-1));

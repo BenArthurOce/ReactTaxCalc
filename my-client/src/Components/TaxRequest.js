@@ -2,33 +2,9 @@ import React, { useState, useEffect } from 'react';
 import TaxCalculate from './TaxCalculate';
 
 
-function TaxRequest({ formData, onUpdateRequests }) {
+function TaxRequest({ formData }) {
 
     const [apiData, setApiData] = useState(null);
-    const [loadingFlag, setLoadingFlag] = useState(false);
-    const [errorFlag, setErrorFlag] = useState(false);
-
-
-    const [errorFlags, setErrorFlags] = useState({
-        incomeTax: false,
-        hecsRepayment: false,
-        lowIncomeOffset: false,
-        lowMiddleIncomeOffset: false,
-        medicareLevyReduction: false,
-        medicareLevySurcharge: false,
-    });
-
-    const loadingFlagtoTrue = () => {
-        setLoadingFlag(true);
-    };
-
-    const loadingFlagtoFalse = () => {
-        setLoadingFlag(false);
-    };
-
-    const performAPIdataState = (newData) => {
-        setApiData(newData);
-    };
 
 
     useEffect(() => {
@@ -64,7 +40,7 @@ function TaxRequest({ formData, onUpdateRequests }) {
         })
         // Put all the bracket data into the component state
         .then(([incomeTaxData, hecsData, litoData, lmitoData, medicareReductionData, medicareSurchargeData]) => {
-            performAPIdataState([incomeTaxData, hecsData, litoData, lmitoData, medicareReductionData, medicareSurchargeData])
+            setApiData([incomeTaxData, hecsData, litoData, lmitoData, medicareReductionData, medicareSurchargeData])
         })
         .catch((error) => {
             console.error("Error caught:", error);
@@ -78,20 +54,10 @@ function TaxRequest({ formData, onUpdateRequests }) {
             <h1>COMPONENT: TaxRequest</h1>
             <h2>Calculation Results</h2>
 
-            {/* conditional rendering */}
-            {/* {loadingFlag && <p>Loading Results</p>}
-            {errorFlags.incomeTax && <p>Error loading Income Tax results</p>}
-            {errorFlags.hecsRepayment && <p>Error loading HECS Repayment results</p>}
-            {errorFlags.lowIncomeOffset && <p>Error loading Low Income Tax Offset results</p>}
-            {errorFlags.lowMiddleIncomeOffset && <p>Error loading Low Middle Income Tax Offset results</p>}
-            {errorFlags.medicareLevyReduction && <p>Error loading Medicare Levy Reduction results</p>}
-            {errorFlags.medicareLevySurcharge && <p>Error loading Medicare Levy Surcharge results</p>}
-            {errorFlags.seniorsPensionersTaxOffset && <p>Error loading Seniors and Pensioners Tax Offset results</p>} */}
             {apiData && (
                 <TaxCalculate
                 apiData={apiData}
                 formData={formData}
-                onUpdateRequests={onUpdateRequests} 
                 />
             )}
         </div>
